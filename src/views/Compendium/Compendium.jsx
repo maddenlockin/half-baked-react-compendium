@@ -30,13 +30,13 @@ export default function Compendium() {
   // }
 
   //TODO 😖 help!
-  //   useEffect(async () => {
-  //      function getTypes() {
-  //       const pokemonTypes = fetchTypes();
-  //       setTypes(pokemonTypes);
-  //     }
-  //     getTypes();
-  //   }, []);
+    useEffect(() => {
+      async function getTypes() {
+        const pokemonTypes = await fetchTypes();
+        setTypes(pokemonTypes);
+      }
+      getTypes();
+    }, []);
 
   //TODO 😖 help!
   // useEffect(() => {
