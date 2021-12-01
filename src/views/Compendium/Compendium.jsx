@@ -22,7 +22,7 @@ export default function Compendium() {
     useEffect(() => {
       async function getPokemon() {
         const pokemonList = await fetchPokemon();
-        this.setState({pokemons: pokemonList});
+        setPokemons(pokemonList);
         setLoading(false);
       };
       getPokemon();
