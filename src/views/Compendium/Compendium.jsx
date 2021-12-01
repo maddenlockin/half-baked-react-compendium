@@ -58,19 +58,21 @@ export default function Compendium() {
     getFilteredPokemon();
   }, [selectedType]);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-    fetchSearchPokemon(searchName)
-      .then((searchedPokemons) => {
-        this.setState({pokemons: searchedPokemons});
-      })
-      .catch((error) => {})
-      .finally(() => {
+    try {
+      await fetchSearchPokemon(searchName)
+      ((searchedPokemons) => {
+        setPokemons(searchedPokemons);
+      });
+    } catch {(error) => {}
+    } finally {(() => {
         setLoading(false);
         setSearchName('');
         setSelectedType('');
       });
+    }
   };
 
   return (
