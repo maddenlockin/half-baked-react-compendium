@@ -17,8 +17,7 @@ export default function Compendium() {
   const [types, setTypes] = useState([]);
   const [selectedType, setSelectedType] = useState('all');
 
-  //TODO 😖 help!
-  if (pokemons.count !== 0) {
+  //TODO 😖 help
     useEffect(() => {
       async function getPokemon() {
         const pokemonList = await fetchPokemon();
@@ -27,7 +26,6 @@ export default function Compendium() {
       };
       getPokemon();
     }, []);
-  }
 
   //TODO 😖 help!
     useEffect(() => {
@@ -58,22 +56,37 @@ export default function Compendium() {
     getFilteredPokemon();
   }, [selectedType]);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setLoading(true);
-    try {
-      await fetchSearchPokemon(searchName)
-      ((searchedPokemons) => {
-        setPokemons(searchedPokemons);
-      });
-    } catch {(error) => {}
-    } finally {(() => {
-        setLoading(false);
-        setSearchName('');
-        setSelectedType('');
-      });
-    }
-  };
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   setLoading(true);
+  //   try {
+  //     await fetchSearchPokemon(searchName)
+  //     ((searchedPokemons) => {
+  //       setPokemons(searchedPokemons);
+  //     });
+  //   } catch (error) => {}
+  //   finally {(() => {
+  //       setLoading(false);
+  //       setSearchName('');
+  //       setSelectedType('');
+  //     });
+  //   }
+  // };
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      setLoading(true);
+      fetchSearchPokemon(searchName)
+        .then((searchedPokemons) => {
+          setPokemons(searchedPokemons);
+        })
+        .catch((error) => {})
+        .finally(() => {
+          setLoading(false);
+          setSearchName("");
+          setSelectedType("");
+        });
+    };
 
   return (
     <div className='app'>
